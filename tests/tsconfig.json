@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "rootDir": "..",
+    "baseUrl": ".",
+    "typeRoots": [
+      "../backend/node_modules/@types"
+    ],
+    "paths": {
+      "supertest": ["../backend/node_modules/supertest"],
+      "*": ["../backend/node_modules/*"]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "../backend/src/**/*.ts"
+  ]
+}

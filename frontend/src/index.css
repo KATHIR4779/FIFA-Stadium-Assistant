@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   FIFA 2026 Smart Stadium Assistant — Global Styles
+   ============================================================================ */
+
+/* --- Base Resets & Typography --- */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 47, 201, 0.4) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgba(139, 47, 201, 0.4);
+    border-radius: 3px;
+  }
+
+  body {
+    @apply font-sans;
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 50%, #0d0d1a 100%);
+    min-height: 100vh;
+  }
+
+  /* Focus ring for keyboard navigation */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-fifa-sky ring-offset-2 ring-offset-fifa-dark;
+  }
+}
+
+/* --- Component Utilities --- */
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    @apply rounded-2xl border border-white/10;
+    background: rgba(26, 26, 62, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Gradient text utility */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #4dc9f6 0%, #8b2fc9 50%, #e040a0 100%);
+  }
+
+  /* Animated gradient background for hero elements */
+  .gradient-bg {
+    background: linear-gradient(135deg, #3d1a78, #8b2fc9, #e040a0, #ff6b6b, #4dc9f6);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  /* Message bubble base */
+  .chat-bubble {
+    @apply rounded-2xl px-4 py-3 max-w-[85%] animate-slide-up;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .chat-bubble-user {
+    @apply chat-bubble bg-gradient-to-r from-fifa-purple to-fifa-magenta text-white ml-auto;
+  }
+
+  .chat-bubble-assistant {
+    @apply chat-bubble glass-card text-gray-100 mr-auto;
+  }
+
+  /* Typing indicator dots */
+  .typing-dot {
+    @apply w-2 h-2 rounded-full bg-fifa-sky;
+    animation: typing 1.2s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* Input field */
+  .chat-input {
+    @apply w-full rounded-xl border border-white/10 bg-fifa-surface px-4 py-3 text-white
+           placeholder-gray-500 transition-all duration-200;
+  }
+
+  .chat-input:focus {
+    @apply border-fifa-sky/50 shadow-lg shadow-fifa-sky/10;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply rounded-xl bg-gradient-to-r from-fifa-purple to-fifa-magenta px-5 py-3
+           font-semibold text-white transition-all duration-200
+           hover:shadow-lg hover:shadow-fifa-magenta/30 hover:scale-[1.02]
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           disabled:hover:scale-100 disabled:hover:shadow-none;
+  }
+
+  .btn-secondary {
+    @apply rounded-xl border border-white/20 bg-white/5 px-4 py-2
+           text-sm text-gray-300 transition-all duration-200
+           hover:bg-white/10 hover:text-white;
+  }
+
+  /* Select dropdown */
+  .select-field {
+    @apply w-full rounded-lg border border-white/10 bg-fifa-surface px-3 py-2
+           text-sm text-white transition-colors duration-200
+           hover:border-white/20 focus:border-fifa-sky/50;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239ca3af' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+
+  /* High contrast mode overrides */
+  .high-contrast .glass-card {
+    @apply border-white/40 bg-black/80;
+  }
+
+  .high-contrast .chat-bubble-assistant {
+    @apply border-white/60 bg-black/90 text-white;
+  }
+
+  .high-contrast .chat-input {
+    @apply border-white/40 bg-black text-white;
+  }
+}
+
+/* --- Markdown inside chat bubbles --- */
+.chat-bubble-assistant p {
+  @apply mb-2 last:mb-0 leading-relaxed;
+}
+
+.chat-bubble-assistant strong {
+  @apply text-fifa-sky font-semibold;
+}
+
+.chat-bubble-assistant ul,
+.chat-bubble-assistant ol {
+  @apply ml-4 mb-2 space-y-1;
+}
+
+.chat-bubble-assistant ul {
+  @apply list-disc;
+}
+
+.chat-bubble-assistant ol {
+  @apply list-decimal;
+}
+
+.chat-bubble-assistant li {
+  @apply text-gray-200;
+}
+
+.chat-bubble-assistant h1,
+.chat-bubble-assistant h2,
+.chat-bubble-assistant h3 {
+  @apply font-semibold text-white mb-1 mt-2;
+}
+
+.chat-bubble-assistant code {
+  @apply bg-white/10 px-1.5 py-0.5 rounded text-fifa-teal text-sm;
+}
+
+.chat-bubble-assistant a {
+  @apply text-fifa-sky underline underline-offset-2 hover:text-white transition-colors;
+}
