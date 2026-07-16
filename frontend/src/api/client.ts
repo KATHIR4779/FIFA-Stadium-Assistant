@@ -5,8 +5,8 @@
 
 import type { ChatRequest, ChatResponse, VenueSummary, ApiErrorResponse } from "../types";
 
-/** Base URL for API calls — in dev, Vite proxy handles this */
-const API_BASE = "/api";
+/** Base URL for API calls — in dev, Vite proxy handles this. In prod, VITE_API_URL is used. */
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 /** Request timeout in milliseconds */
 const REQUEST_TIMEOUT_MS = 35000;
