@@ -9,6 +9,7 @@ dotenv.config({ path: "../.env" });
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import compression from "compression";
 import rateLimit from "express-rate-limit";
 
 import healthRouter from "./routes/health";
@@ -24,6 +25,9 @@ const PORT = process.env.PORT || 3001;
 
 // Helmet sets various HTTP security headers
 app.use(helmet());
+
+// Compress all HTTP responses
+app.use(compression());
 
 // CORS — allow frontend dev server
 app.use(

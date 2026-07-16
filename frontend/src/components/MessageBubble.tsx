@@ -11,7 +11,7 @@ interface MessageBubbleProps {
   message: Message;
 }
 
-export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
+export const MessageBubble: React.FC<MessageBubbleProps> = React.memo(({ message }) => {
   const isUser = message.role === "user";
   const time = new Date(message.timestamp).toLocaleTimeString([], {
     hour: "2-digit",
@@ -66,12 +66,12 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
       </div>
     </div>
   );
-};
+});
 
 /**
  * Typing indicator shown while the AI is generating a response.
  */
-export const TypingIndicator: React.FC = () => (
+export const TypingIndicator: React.FC = React.memo(() => (
   <div className="flex justify-start mb-4 animate-fade-in" role="status" aria-label="Assistant is typing">
     <div className="flex flex-col">
       <div className="flex items-center gap-2 mb-1 text-xs">
@@ -88,4 +88,4 @@ export const TypingIndicator: React.FC = () => (
       </div>
     </div>
   </div>
-);
+));

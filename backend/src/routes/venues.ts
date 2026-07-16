@@ -17,6 +17,9 @@ const router = Router();
 router.get("/", (req: Request, res: Response) => {
   const full = req.query.full === "true";
 
+  // Venues data is static, safe to cache for 24 hours
+  res.set("Cache-Control", "public, max-age=86400");
+
   if (full) {
     res.json({ venues });
   } else {

@@ -23,7 +23,7 @@ interface MapSection {
  * Interactive SVG stadium map.
  * Sections glow when hovered or highlighted by the AI assistant.
  */
-export const StadiumMap: React.FC<StadiumMapProps> = ({
+export const StadiumMap: React.FC<StadiumMapProps> = React.memo(({
   highlightedSections = [],
 }) => {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
@@ -454,4 +454,4 @@ export const StadiumMap: React.FC<StadiumMapProps> = ({
       </div>
     </div>
   );
-};
+});
