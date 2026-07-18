@@ -3,7 +3,7 @@
 // Tests sliding window, session expiry, and message limits
 // ============================================================================
 
-import { SessionManager } from "../../backend/src/services/session";
+import { SessionManager, sessionManager } from "../../backend/src/services/session";
 import { UserContext, ChatMessage } from "../../backend/src/types";
 
 const mockContext: UserContext = {
@@ -22,6 +22,10 @@ describe("SessionManager", () => {
 
   beforeEach(() => {
     manager = new SessionManager();
+  });
+
+  afterAll(() => {
+    sessionManager.destroy();
   });
 
   afterEach(() => {

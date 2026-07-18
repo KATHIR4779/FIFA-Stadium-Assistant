@@ -5,8 +5,13 @@
 
 import request from "supertest";
 import { app } from "../../backend/src/index";
+import { sessionManager } from "../../backend/src/services/session";
 
 process.env.NODE_ENV = "test";
+
+afterAll(() => {
+  sessionManager.destroy();
+});
 
 describe("GET /api/venues", () => {
   it("returns a list of venue summaries", async () => {

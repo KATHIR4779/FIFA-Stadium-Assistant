@@ -24,8 +24,10 @@ function getClient(): GoogleGenerativeAI | null {
   return genAI;
 }
 
+const DEFAULT_MODEL = "gemini-1.5-flash";
+
 function getModelName(): string {
-  return process.env.GEMINI_MODEL || "gemini-2.5-flash";
+  return process.env.GEMINI_MODEL || DEFAULT_MODEL;
 }
 
 const MAX_RETRIES = 2;
@@ -46,7 +48,9 @@ export async function getAIResponse(
   const client = getClient();
 
   if (!client) {
-    console.log("[Gemini] No API key configured — using mock responses");
+    if (process.env.NODE_ENV !== "test") {
+      console.log("[Gemini] No API key configured — using mock responses");
+    }
     return {
       reply: getMockResponse(userMessage, userContext),
       isMock: true,

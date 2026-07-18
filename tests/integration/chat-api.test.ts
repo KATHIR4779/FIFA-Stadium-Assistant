@@ -5,10 +5,15 @@
 
 import request from "supertest";
 import { app } from "../../backend/src/index";
+import { sessionManager } from "../../backend/src/services/session";
 
 // Ensure we're in test/mock mode (no API key)
 process.env.GEMINI_API_KEY = "";
 process.env.NODE_ENV = "test";
+
+afterAll(() => {
+  sessionManager.destroy();
+});
 
 const validChatBody = {
   message: "Where can I find my seat?",
