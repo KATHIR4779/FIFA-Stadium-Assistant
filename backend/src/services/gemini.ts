@@ -24,7 +24,7 @@ function getClient(): GoogleGenerativeAI | null {
   return genAI;
 }
 
-const DEFAULT_MODEL = "gemini-1.5-flash";
+const DEFAULT_MODEL = "gemini-3.5-flash";
 
 function getModelName(): string {
   return process.env.GEMINI_MODEL || DEFAULT_MODEL;
@@ -58,7 +58,7 @@ export async function getAIResponse(
   }
 
   const systemPrompt = buildSystemPrompt(userContext);
-  
+
   // Format history for Gemini API
   const history = conversationHistory.map(msg => ({
     role: msg.role === "assistant" ? "model" : "user",
@@ -77,7 +77,7 @@ export async function getAIResponse(
       const chat = model.startChat({
         history,
       });
-      
+
       const result = await chat.sendMessage(userMessage);
       const reply = result.response.text();
 
@@ -88,7 +88,7 @@ export async function getAIResponse(
       return { reply: reply.trim(), isMock: false };
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
-      
+
       if (attempt < MAX_RETRIES) {
         const delay = Math.pow(2, attempt) * 1000;
         console.warn(`[Gemini] Error (attempt ${attempt + 1}/${MAX_RETRIES + 1}), retrying in ${delay}ms:`, lastError.message);
